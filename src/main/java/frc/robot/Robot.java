@@ -47,26 +47,31 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     double time = Timer.getFPGATimestamp();
 
-    if (time - startTime < 1.85) {
-      leftMotor1.set(0.6);
-      leftMotor2.set(0.6);
-      rightMotor1.set(-0.6);
-      rightMotor2.set(-0.6);
-    }else if (time - startTime < 3.27 ) {
-      leftMotor1.set(0.36);
-      leftMotor2.set(0.36);
-      rightMotor1.set(0.3);
-      rightMotor2.set(0.3);
-    }else if (time - startTime < 5.12){
-      leftMotor1.set(0.6);
-      leftMotor2.set(0.6);
-      rightMotor1.set(-0.6);
-      rightMotor2.set(-0.6);
-    }else {
-      leftMotor1.set(0.0);
-      leftMotor2.set(0.0);
-      rightMotor1.set(0.0);
-      rightMotor2.set(0.0);
+    if (time - startTime < Constants.timeTillTurn) {
+      leftMotor1.set(Constants.driveLeftSpeed);
+      leftMotor2.set(Constants.driveLeftSpeed);
+      rightMotor1.set(Constants.driveRightSpeed);
+      rightMotor2.set(Constants.driveRightSpeed);
+    }else if (time - startTime < Constants.timeTillDrive ) {
+      leftMotor1.set(Constants.turnLeftSpeed);
+      leftMotor2.set(Constants.turnLeftSpeed);
+      rightMotor1.set(Constants.turnRightSpeed);
+      rightMotor2.set(Constants.turnRightSpeed);
+    }else if (time - startTime < Constants.timeTillTurnBack){
+      leftMotor1.set(Constants.driveLeftSpeed);
+      leftMotor2.set(Constants.driveLeftSpeed);
+      rightMotor1.set(Constants.driveRightSpeed);
+      rightMotor2.set(Constants.driveRightSpeed);
+    }else if (time - startTime < Constants.timeTillStop){
+      leftMotor1.set(Constants.turnLeftSpeed);
+      leftMotor2.set(Constants.turnLeftSpeed);
+      rightMotor1.set(Constants.turnRightSpeed);
+      rightMotor2.set(Constants.turnRightSpeed);
+    }else{
+      leftMotor1.set(Constants.stopspeed);
+      leftMotor2.set(Constants.stopspeed);
+      rightMotor1.set(Constants.stopspeed);
+      rightMotor2.set(Constants.stopspeed);
     }
     
 
